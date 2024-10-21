@@ -36,6 +36,8 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
 
+        console.log("Creating user:", userData);
+
         await userModel.findOneAndUpdate({ clerkId: data.id }, userData);
         res.json({});
         break;
