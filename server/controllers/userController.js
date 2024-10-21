@@ -5,7 +5,7 @@ const clerkWebhooks = async (req, res) => {
   try {
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
-    await whook.verify(JSON.stringify(req.body), {
+    await whook.verify(JSON.stringify(req.body),{
       'svix-id': req.headers['svix-id'],
       'svix-timestamp': req.headers['svix-timestamp'],
       'svix-signature': req.headers['svix-signature'],
@@ -23,9 +23,10 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
 
-        console.log("Creating user:", userData);
+        
 
-        await userModel.create(userData);
+        const user = await userModel.create(userData);
+        console.log(user)
         res.json({});
         break;
       }
@@ -57,4 +58,7 @@ const clerkWebhooks = async (req, res) => {
   }
 };
 
-export { clerkWebhooks };
+
+
+
+export {clerkWebhooks};
