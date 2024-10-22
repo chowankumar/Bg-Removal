@@ -11,7 +11,7 @@ const clerkWebhooks = async (req, res) => {
       'svix-signature': req.headers['svix-signature'],
     });
 
-    const { data, type } = req.body;
+    const { data,type} = req.body;
 
     switch (type) {
       case 'user.created': {
@@ -59,13 +59,13 @@ const clerkWebhooks = async (req, res) => {
 };
 
 
+
 const userCredits = async (req,res)=>{
   try {
 
     const {clerkId} = req.body
     const userData = await userModel.findOne({clerkId});
-
-    res.json({success:true,credits:userData.creditBalance})
+    res.json({success:true,credits:userData.creditBalance})  
     
   } catch (error) {
     console.log(error.message);
@@ -73,5 +73,8 @@ const userCredits = async (req,res)=>{
     
   }
 }
+
+ 
+
 
 export {clerkWebhooks,userCredits};
